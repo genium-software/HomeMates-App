@@ -29,33 +29,11 @@ The React Native application using EXPO CLI to consume REST API of HomeMates-API
 * Manage multiple houses
 
 ## System Specifications & Architecture
-This project is built by consuming RESTful API that connects React Native Apps(Android and IOs). MongoDB is complemented with MongooseJS to help converts schemas into NoSQL queries. This main repository provides REST API data and a landing page for marekting purposes.
-
-Below are the basic architecture of this repository:
-```
-├── app.js
-├── config
-├── db
-├── bin
-│   └── www
-├── package.json
-├── public
-│   ├── images
-│   ├── javascripts
-│   └── stylesheets
-│       └── style.css
-├── routes
-│   ├── index.js
-│   └── users.js
-└── views
-    ├── error.pug
-    ├── index.pug
-    └── layout.pug
-```    
+This project is built by consuming RESTful API that connects React Native Apps (Android and IOs). It uses Redux to manage states accross the app. To fetch data from RESTful API, it utilises Axios library instead of native 'fetch' method from React. 
 
 ## Credits
-Riordan Dervin Alfredo - Lead Software Engineer / Front-End Engineer | [profile website](https://rioalfredo.com) 
+__Riordan Dervin Alfredo__ - Lead Software Engineer / Front-End Engineer | [profile website](https://rioalfredo.com) 
 
-Vincent Sutinah - Software Developer / Back-End Engineer | email: vincentsutinah@gmail.com
+__Vincent Sutinah__ - Software Developer / Back-End Engineer | email: vincentsutinah@gmail.com
 
-Jason Anthony Kie - Software Developer / Native App Engineer | email:jasonkie@gmail.com
+__Jason Anthony Kie__ - Software Developer / Native App Engineer | email:jasonakie28@gmail.com
