@@ -29,7 +29,7 @@ The React Native application using EXPO CLI with Firebase (Firestore database). 
 * Manage multiple houses
 
 ## System Specifications & Architecture
-This project is mainly focus in using React Native with Firestore as the main database. EXPO CLI is rather than React Native CLI is due to its simplicity in deployment and expo libraries integration. The main reason for using Firebase SDK is to simplify data storage management & developers able to focus on developing features. Google Firebase also provides extensive data analytics, authentication, and email management. For the UI library, this app will be using [UI Kitten - Documentation](https://akveo.github.io/react-native-ui-kitten/docs/components/components-overview) because it has beautiful and simple UI. 
+This project is mainly focus in using React Native with Firestore as the main database. EXPO CLI is chosen rather than React Native CLI because it is simple in terms of deployment. It also has plenty of libraries that will suffice the requirements. The main reason for using Firebase SDK is to simplify data storage management & developers able to focus on developing features. Google Firebase also provides extensive data analytics, authentication, and email management. For the UI library, this app will be using [UI Kitten - Documentation](https://akveo.github.io/react-native-ui-kitten/docs/components/components-overview) because it has beautiful and simple UI. 
 
 ## Credits
 __Riordan Dervin Alfredo__ - Lead Software Engineer / Full-stack Engineer | [profile website](https://rioalfredo.com) 
