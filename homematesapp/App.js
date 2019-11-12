@@ -1,21 +1,32 @@
-import React, { Component } from "react";
+//
+// Copyright Genium Software 2019
+//
+
+import React from "react";
 import * as firebase from "firebase";
 import { mapping, light as lightTheme } from "@eva-design/eva";
 import { ApplicationProvider } from "react-native-ui-kitten";
 import { createAppContainer } from "react-navigation";
-import {
-  createStackNavigator,
-  createDrawerNavigator
-} from "react-navigation-stack";
-import screens from "./views/screens";
-// // import the different screens
-import LoadingView from "./views/Loading";
-import SignUpView from "./views/auth/SignUp";
-import LoginView from "./views/auth/Login";
-import DashboardView from "./views/dashboard/index";
+import { createStackNavigator } from "react-navigation-stack";
+import { createDrawerNavigator } from "react-navigation-drawer";
+import { createBottomTabNavigator } from "react-navigation-tabs";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
-// Initialize Firebase
-// TODO : move it to the config.json
+//Stacks
+import { Login, SignUp } from "./stacks/auth";
+import {
+  HouseSettings,
+  BillSplitter,
+  Dashboard,
+  TenantManagement,
+  History
+} from "./stacks/bottom-menu-stacks";
+import { UserSettings } from "./stacks/user-settings";
+import LoadingView from "./views/Loading";
+
+import screens from "./views/screens";
+
+// Initialize Firebase, TODO : move it to the config.json
 const firebaseConfig = {
   apiKey: "AIzaSyBLeNW7z6_c2bC8fESRbi_-szUd2f0LYTk",
   authDomain: "homemates.firebaseapp.com",
@@ -27,38 +38,9 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
-class SignUp extends Component {
-  static navigationOptions = { title: "Sign Up" };
-  render() {
-    return <SignUpView navigation={this.props.navigation} />;
-  }
-}
-
-class Login extends Component {
-  static navigationOptions = { title: "Login" };
-  render() {
-    return <LoginView navigation={this.props.navigation} />;
-  }
-}
-
-class Dashboard extends Component {
-  static navigationOptions = { title: "Dashboard" };
-  render() {
-    return <DashboardView navigation={this.props.navigation} />;
-  }
-}
-
-class MenuSetting extends Component {
-  static navigationOptions = ({ navigation }) => {
-    options.headerLeft = <HeaderButtonMenu navigation={navigation} />;
-    return options;
-  };
-  render() {
-    return <MenuView navigation={this.props.navigation} />;
-  }
-}
-
-// create our app's navigation stack
+//
+// APPs STACKING in REACT NAVIGATION
+//
 const RootStack = createStackNavigator(
   {
     LoadingView,
@@ -67,7 +49,7 @@ const RootStack = createStackNavigator(
     [screens.DASHBOARD_VIEW]: Dashboard
   },
   {
-    initialRouteName: "Dashboard"
+    initialRouteName: screens.DASHBOARD_VIEW
   }
 );
 
@@ -90,6 +72,19 @@ const SettingStack = createStackNavigator(
   }
 );
 
+const bottomTabNavigator = createBottomTabNavigator(
+  {
+    [screens.HOUSE_SETTINGS_VIEW]: HouseSettings,
+    [screens.BILL_SPLITTER_VIEW]: BillSplitter,
+    [screens.DASHBOARD_VIEW]: Dashboard,
+    [screens.TENANT_MANAGEMENT_VIEW]: TenantManagement,
+    [screens.HISTORY_VIEW]: History
+  },
+  {
+    initialRouteName: screens.DASHBOARD_VIEW
+  }
+);
+
 const RootDrawer = createDrawerNavigator({
   Home: {
     screen: RootStack,
@@ -104,7 +99,8 @@ const RootDrawer = createDrawerNavigator({
       drawerLabel: "Settings",
       drawerIcon: () => <Icon name="settings" size={20} color="black" />
     }
-  }
+  },
+  Dashboard: bottomTabNavigator
 });
 
 const AppContainer = createAppContainer(RootDrawer);
