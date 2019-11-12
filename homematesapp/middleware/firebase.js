@@ -1,0 +1,3 @@
+const firebaseHouseFunctions = {
+  createHouse: async () => {}
+};

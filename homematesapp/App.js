@@ -1,5 +1,4 @@
 import React from "react";
-import { StyleSheet, Platform, Image, Text, View } from "react-native";
 import * as firebase from "firebase";
 import { mapping, light as lightTheme } from "@eva-design/eva";
 import { ApplicationProvider } from "react-native-ui-kitten";
@@ -12,6 +11,7 @@ import Login from "./views/auth/Login";
 import Dashboard from "./views/dashboard/index";
 
 // Initialize Firebase
+// TODO : move it to the config.json
 const firebaseConfig = {
   apiKey: "AIzaSyBLeNW7z6_c2bC8fESRbi_-szUd2f0LYTk",
   authDomain: "homemates.firebaseapp.com",
