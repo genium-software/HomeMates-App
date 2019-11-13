@@ -41,6 +41,7 @@ firebase.initializeApp(firebaseConfig);
 //
 // APPs STACKING in REACT NAVIGATION
 //
+
 const RootStack = createStackNavigator(
   {
     LoadingView,
@@ -74,36 +75,43 @@ const SettingStack = createStackNavigator(
 
 const bottomTabNavigator = createBottomTabNavigator(
   {
-    [screens.HOUSE_SETTINGS_VIEW]: HouseSettings,
-    [screens.BILL_SPLITTER_VIEW]: BillSplitter,
-    [screens.DASHBOARD_VIEW]: Dashboard,
-    [screens.TENANT_MANAGEMENT_VIEW]: TenantManagement,
-    [screens.HISTORY_VIEW]: History
+    [screens.HOUSE_SETTINGS_VIEW]: {
+      screen: HouseSettings,
+      navigationOptions: {
+        tabBarIcon: () => <Icon name="settings" size={20} color = "black" />
+      }
+    },
+    [screens.BILL_SPLITTER_VIEW]: {
+      screen: BillSplitter,
+      navigationOptions: {
+        tabBarIcon: () => <Icon name="credit-card" size={20} color = "black" />
+      }
+    },
+    [screens.DASHBOARD_VIEW]: {
+      screen: Dashboard,
+      navigationOptions: {
+        tabBarIcon: () => <Icon name="home" size={20} color = "black" />
+      }
+    },
+    [screens.TENANT_MANAGEMENT_VIEW]: {
+      screen: TenantManagement,
+      navigationOptions: {
+        tabBarIcon: () => <Icon name="people" size={20} color = "black" />
+      }
+    },
+    [screens.HISTORY_VIEW]: {
+      screen: History,
+      navigationOptions: {
+        tabBarIcon: () => <Icon name="timer" size={20} color = "black" />
+      }
+    }
   },
   {
     initialRouteName: screens.DASHBOARD_VIEW
   }
 );
 
-const RootDrawer = createDrawerNavigator({
-  Home: {
-    screen: RootStack,
-    navigationOptions: {
-      drawerLabel: "Home",
-      drawerIcon: () => <Icon name="home" size={20} color="black" />
-    }
-  },
-  Menu: {
-    screen: SettingStack,
-    navigationOptions: {
-      drawerLabel: "Settings",
-      drawerIcon: () => <Icon name="settings" size={20} color="black" />
-    }
-  },
-  Dashboard: bottomTabNavigator
-});
-
-const AppContainer = createAppContainer(RootDrawer);
+const AppContainer = createAppContainer(bottomTabNavigator);
 
 // create our app's navigation stack
 const App = () => (

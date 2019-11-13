@@ -22,7 +22,7 @@ export class Dashboard extends Component {
 }
 
 export class HouseSettings extends Component {
-  static navigationOptions = { title: "House Settings" };
+  static navigationOptions = { title: "Settings" };
   render() {
     return <HouseSettingsView navigation={this.props.navigation} />;
   }
@@ -35,7 +35,7 @@ export class BillSplitter extends Component {
   }
 }
 export class TenantManagement extends Component {
-  static navigationOptions = { title: "Tenant Management" };
+  static navigationOptions = { title: "Management" };
   render() {
     return <TenantManagementView navigation={this.props.navigation} />;
   }
