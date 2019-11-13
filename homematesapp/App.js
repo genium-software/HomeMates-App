@@ -25,6 +25,7 @@ import { UserSettings } from "./stacks/user-settings";
 import LoadingView from "./views/Loading";
 
 import screens from "./views/screens";
+import { Screen } from "react-native-screens";
 
 // Initialize Firebase, TODO : move it to the config.json
 const firebaseConfig = {
@@ -42,7 +43,7 @@ firebase.initializeApp(firebaseConfig);
 // APPs STACKING in REACT NAVIGATION
 //
 
-const RootStack = createStackNavigator(
+const AuthStack = createStackNavigator(
   {
     LoadingView,
     [screens.SIGNUP_VIEW]: SignUp,
@@ -73,36 +74,37 @@ const SettingStack = createStackNavigator(
   }
 );
 
+// Bottom Tab Navigator
 const bottomTabNavigator = createBottomTabNavigator(
   {
     [screens.HOUSE_SETTINGS_VIEW]: {
       screen: HouseSettings,
       navigationOptions: {
-        tabBarIcon: () => <Icon name="settings" size={20} color = "black" />
+        tabBarIcon: () => <Icon name="settings" size={20} color="black" />
       }
     },
     [screens.BILL_SPLITTER_VIEW]: {
       screen: BillSplitter,
       navigationOptions: {
-        tabBarIcon: () => <Icon name="credit-card" size={20} color = "black" />
+        tabBarIcon: () => <Icon name="credit-card" size={20} color="black" />
       }
     },
     [screens.DASHBOARD_VIEW]: {
       screen: Dashboard,
       navigationOptions: {
-        tabBarIcon: () => <Icon name="home" size={20} color = "black" />
+        tabBarIcon: () => <Icon name="home" size={20} color="black" />
       }
     },
     [screens.TENANT_MANAGEMENT_VIEW]: {
       screen: TenantManagement,
       navigationOptions: {
-        tabBarIcon: () => <Icon name="people" size={20} color = "black" />
+        tabBarIcon: () => <Icon name="people" size={20} color="black" />
       }
     },
     [screens.HISTORY_VIEW]: {
       screen: History,
       navigationOptions: {
-        tabBarIcon: () => <Icon name="timer" size={20} color = "black" />
+        tabBarIcon: () => <Icon name="timer" size={20} color="black" />
       }
     }
   },
@@ -111,7 +113,31 @@ const bottomTabNavigator = createBottomTabNavigator(
   }
 );
 
-const AppContainer = createAppContainer(bottomTabNavigator);
+// TODO: Set Header Title for each view (either use view title or Homemates logo) and setup User Settings button in header
+const RootStack = createStackNavigator(
+  {
+    [screens.DASHBOARD_VIEW]: bottomTabNavigator,
+    [screens.HOUSE_SETTINGS_VIEW]: HouseSettings,
+    [screens.BILL_SPLITTER_VIEW]: BillSplitter,
+    [screens.TENANT_MANAGEMENT_VIEW]: TenantManagement,
+    [screens.HISTORY_VIEW]: History,
+  },
+  {
+    initialRouteName: screens.DASHBOARD_VIEW,
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: "#212121"
+      },
+      headerTintColor: "white",
+      headerTitleStyle: {
+        fontWeight: "400",
+        textAlign: "center"
+      }
+    }
+  }
+);
+
+const AppContainer = createAppContainer(RootStack);
 
 // create our app's navigation stack
 const App = () => (
