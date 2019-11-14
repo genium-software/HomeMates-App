@@ -5,10 +5,9 @@
 import React from "react";
 import * as firebase from "firebase";
 import { mapping, light as lightTheme } from "@eva-design/eva";
-import { ApplicationProvider } from "react-native-ui-kitten";
+import { ApplicationProvider, Text, Button } from "react-native-ui-kitten";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
-import { createDrawerNavigator } from "react-navigation-drawer";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
@@ -26,6 +25,7 @@ import LoadingView from "./views/Loading";
 
 import screens from "./views/screens";
 import { Screen } from "react-native-screens";
+import pageStyles from "./assets/page-styles";
 
 // Initialize Firebase, TODO : move it to the config.json
 const firebaseConfig = {
@@ -113,7 +113,8 @@ const bottomTabNavigator = createBottomTabNavigator(
   }
 );
 
-// TODO: Set Header Title for each view (either use view title or Homemates logo) and setup User Settings button in header
+// TODO: Set Header Title for each view (either use view title or Homemates logo) & link User Settings view to header button
+// TODO: Fix header title style not connecting to the header title
 const RootStack = createStackNavigator(
   {
     [screens.DASHBOARD_VIEW]: bottomTabNavigator,
@@ -121,17 +122,23 @@ const RootStack = createStackNavigator(
     [screens.BILL_SPLITTER_VIEW]: BillSplitter,
     [screens.TENANT_MANAGEMENT_VIEW]: TenantManagement,
     [screens.HISTORY_VIEW]: History,
+    [screens.USER_SETTINGS_VIEW]: SettingStack
   },
   {
     initialRouteName: screens.DASHBOARD_VIEW,
     defaultNavigationOptions: {
+      headerTitle: () => <Text>HomeMates</Text>,
+      headerRight: () => (
+        <Icon name="more-vert" size={30} color="white" />
+      ),
       headerStyle: {
         backgroundColor: "#212121"
       },
       headerTintColor: "white",
       headerTitleStyle: {
         fontWeight: "400",
-        textAlign: "center"
+        textAlign: "center",
+        color: "white",
       }
     }
   }
