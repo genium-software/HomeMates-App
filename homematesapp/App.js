@@ -3,13 +3,13 @@
 //
 
 import React from "react";
-import * as firebase from "firebase";
 import { mapping, light as lightTheme } from "@eva-design/eva";
 import { ApplicationProvider, Text, Button } from "react-native-ui-kitten";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import db from "./firebase";
 
 //Stacks
 import { Login, SignUp } from "./stacks/auth";
@@ -22,26 +22,9 @@ import {
 } from "./stacks/bottom-menu-stacks";
 import { UserSettings } from "./stacks/user-settings";
 import LoadingView from "./views/Loading";
-
 import screens from "./views/screens";
-import { Screen } from "react-native-screens";
-import pageStyles from "./assets/page-styles";
 
-// Initialize Firebase, TODO : move it to the config.json
-const firebaseConfig = {
-  apiKey: "AIzaSyBLeNW7z6_c2bC8fESRbi_-szUd2f0LYTk",
-  authDomain: "homemates.firebaseapp.com",
-  databaseURL: "https://homemates.firebaseio.com",
-  projectId: "homemates",
-  storageBucket: "homemates.appspot.com",
-  messagingSenderId: "339152637924",
-  appId: "1:339152637924:web:b575558491b9f12f6641f1"
-};
-firebase.initializeApp(firebaseConfig);
-
-//
-// APPs STACKING in REACT NAVIGATION
-//
+const firestoreDB = db; // call db;
 
 const AuthStack = createStackNavigator(
   {
@@ -128,9 +111,7 @@ const RootStack = createStackNavigator(
     initialRouteName: screens.DASHBOARD_VIEW,
     defaultNavigationOptions: {
       headerTitle: () => <Text>HomeMates</Text>,
-      headerRight: () => (
-        <Icon name="more-vert" size={30} color="white" />
-      ),
+      headerRight: () => <Icon name="more-vert" size={30} color="white" />,
       headerStyle: {
         backgroundColor: "#212121"
       },
@@ -138,7 +119,7 @@ const RootStack = createStackNavigator(
       headerTitleStyle: {
         fontWeight: "400",
         textAlign: "center",
-        color: "white",
+        color: "white"
       }
     }
   }
